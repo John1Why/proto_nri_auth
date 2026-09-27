@@ -25,6 +25,7 @@ type Registration_Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Login         string                 `protobuf:"bytes,1,opt,name=Login,proto3" json:"Login,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=Email,proto3" json:"Email,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=Password,proto3" json:"Password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69,6 +70,13 @@ func (x *Registration_Request) GetLogin() string {
 func (x *Registration_Request) GetEmail() string {
 	if x != nil {
 		return x.Email
+	}
+	return ""
+}
+
+func (x *Registration_Request) GetPassword() string {
+	if x != nil {
+		return x.Password
 	}
 	return ""
 }
@@ -119,9 +127,8 @@ func (x *Registration_Response) GetUser_ID() int64 {
 
 type Login_Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=Email,proto3" json:"Email,omitempty"`
-	Login         string                 `protobuf:"bytes,2,opt,name=Login,proto3" json:"Login,omitempty"`
-	User_ID       int64                  `protobuf:"varint,3,opt,name=User_ID,json=UserID,proto3" json:"User_ID,omitempty"`
+	Login         string                 `protobuf:"bytes,1,opt,name=Login,proto3" json:"Login,omitempty"`
+	PasswordHash  string                 `protobuf:"bytes,2,opt,name=PasswordHash,proto3" json:"PasswordHash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -156,13 +163,6 @@ func (*Login_Request) Descriptor() ([]byte, []int) {
 	return file_auth_auth_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Login_Request) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
 func (x *Login_Request) GetLogin() string {
 	if x != nil {
 		return x.Login
@@ -170,11 +170,11 @@ func (x *Login_Request) GetLogin() string {
 	return ""
 }
 
-func (x *Login_Request) GetUser_ID() int64 {
+func (x *Login_Request) GetPasswordHash() string {
 	if x != nil {
-		return x.User_ID
+		return x.PasswordHash
 	}
-	return 0
+	return ""
 }
 
 type Login_Responce struct {
@@ -225,21 +225,21 @@ var File_auth_auth_proto protoreflect.FileDescriptor
 
 const file_auth_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x0fauth/auth.proto\x12\x04auth\"B\n" +
+	"\x0fauth/auth.proto\x12\x04auth\"^\n" +
 	"\x14Registration_Request\x12\x14\n" +
 	"\x05Login\x18\x01 \x01(\tR\x05Login\x12\x14\n" +
-	"\x05Email\x18\x02 \x01(\tR\x05Email\"0\n" +
+	"\x05Email\x18\x02 \x01(\tR\x05Email\x12\x1a\n" +
+	"\bPassword\x18\x03 \x01(\tR\bPassword\"0\n" +
 	"\x15Registration_Response\x12\x17\n" +
-	"\aUser_ID\x18\x01 \x01(\x03R\x06UserID\"T\n" +
+	"\aUser_ID\x18\x01 \x01(\x03R\x06UserID\"I\n" +
 	"\rLogin_Request\x12\x14\n" +
-	"\x05Email\x18\x01 \x01(\tR\x05Email\x12\x14\n" +
-	"\x05Login\x18\x02 \x01(\tR\x05Login\x12\x17\n" +
-	"\aUser_ID\x18\x03 \x01(\x03R\x06UserID\"&\n" +
+	"\x05Login\x18\x01 \x01(\tR\x05Login\x12\"\n" +
+	"\fPasswordHash\x18\x02 \x01(\tR\fPasswordHash\"&\n" +
 	"\x0eLogin_Responce\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token2\x83\x01\n" +
 	"\x04Auth\x12G\n" +
 	"\fRegistration\x12\x1a.auth.Registration_Request\x1a\x1b.auth.Registration_Response\x122\n" +
-	"\x05Login\x12\x13.auth.Login_Request\x1a\x14.auth.Login_ResponceB(Z&api/proto/auth/auth.proto;auth_Serviceb\x06proto3"
+	"\x05Login\x12\x13.auth.Login_Request\x1a\x14.auth.Login_ResponceB$Z\"proto/auth/auth.proto;auth_Serviceb\x06proto3"
 
 var (
 	file_auth_auth_proto_rawDescOnce sync.Once

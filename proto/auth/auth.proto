@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth;
 
-option go_package = "api/proto/auth/auth.proto;auth_Service";
+option go_package = "proto/auth/auth.proto;auth_Service";
 
 service Auth {
     rpc Registration (Registration_Request) returns (Registration_Response);
@@ -13,6 +13,7 @@ service Auth {
 message Registration_Request {
     string Login = 1;
     string Email = 2;
+    string Password = 3;
 }
 
 message Registration_Response {
@@ -20,9 +21,8 @@ message Registration_Response {
 }
 
 message Login_Request {
-    string Email = 1;
-    string Login = 2;
-    int64 User_ID = 3;
+    string Login = 1;
+    string PasswordHash = 2;
 }
 
 message Login_Responce {
